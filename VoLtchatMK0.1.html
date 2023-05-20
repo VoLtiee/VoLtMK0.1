@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Box</title>
+    <style>
+        body {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+        }
+
+        #header {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #chatbox {
+            width: 400px;
+            height: 300px;
+            overflow: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-image: url('https://cdn.discordapp.com/attachments/852854071026647071/1109544695874457610/2224368.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        #message {
+            width: 300px;
+        }
+
+        #sendBtn {
+            display: block;
+            width: 100%;
+            font-size: 18px;
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="header">Welcome! Let's have some fun conversations!</h1>
+
+    <div id="chatbox"></div>
+    <input type="text" id="username" placeholder="Your username">
+    <br>
+    <input type="text" id="message" placeholder="Type your message...">
+    <button id="sendBtn" onclick="sendMessage()">Send</button>
+
+    <script>
+        var username = ""; // Variable to store the username
+
+        function getRandomColor() {
+            var letters = "0123456789ABCDEF";
+            var color = "#";
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function sendMessage() {
+            var usernameInput = document.getElementById("username");
+            var messageInput = document.getElementById("message");
+            var message = messageInput.value;
+            
+            if (username === "" && usernameInput.value !== "") {
+                // Set the username if it's empty and a value is provided
+                username = usernameInput.value;
+                usernameInput.disabled = true; // Disable username input
+            }
+            
+            if (username !== "" && message !== "") {
+                var chatbox = document.getElementById("chatbox");
+                var color = getRandomColor();
+                var chatMessage = "<p><strong style='color: " + color + "'>" + username + ":</strong> " + message + "</p>";
+                chatbox.innerHTML += chatMessage;
+                messageInput.value = "";
+                messageInput.focus();
+            }
+        }
+    </script>
+</body>
+</html>
